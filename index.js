@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = 3000;
 
@@ -19,13 +20,16 @@ function getCurrentDateTime() {
     return formatter.format(new Date());
 }
 
+// Servir arquivos estáticos da pasta 'public'
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Rota para retornar a data e hora atual de São Paulo
-app.get('/datetime', (req, res) => {
+app.get('/api/datetime', (req, res) => {
     const currentDateTime = getCurrentDateTime();
     res.json({ datetime: currentDateTime });
 });
 
 // Iniciar o servidor
 app.listen(port, () => {
-    console.log(`API rodando em http://localhost:${port}`);
+    console.log(`Servidor rodando em http://localhost:${port}`);
 });
