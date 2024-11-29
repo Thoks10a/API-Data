@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data e Hora de São Paulo</title>
+</head>
+<body>
+    <h1>Data e Hora Atual de São Paulo</h1>
+    <p id="datetime">Carregando...</p>
+
+    <script>
+        async function fetchDateTime() {
+            const response = await fetch('/api/datetime');
+            const data = await response.json();
+            document.getElementById('datetime').textContent = data.datetime;
+        }
+
+        fetchDateTime();
+        setInterval(fetchDateTime, 1000); // Atualiza a cada segundo
+    </script>
+</body>
+</html>
